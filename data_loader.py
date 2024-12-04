@@ -6,5 +6,8 @@ def load_dataset(dataset_id):
     X = dataset.data.features
     y = dataset.data.targets
     # Convert target variable to numerical format
-    y_encoded = y.iloc[:, 0].astype('category').cat.codes
+    if dataset_id == 2:  # Adult dataset
+        y_encoded = (y.iloc[:, 0] == ' >50K').astype(int)
+    else:
+        y_encoded = y.iloc[:, 0].astype('category').cat.codes
     return X, y_encoded
