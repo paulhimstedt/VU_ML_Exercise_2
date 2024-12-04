@@ -10,9 +10,11 @@ def run_experiment(X_train, y_train, X_test, y_test):
     r2 = r2_score(y_test, predictions)
     return mse, r2
 
-def plot_results(results):
+def plot_results(results, title, output_dir):
     plt.figure()
+    plt.title(title)
     plt.plot(results['mse'], label='MSE')
     plt.plot(results['r2'], label='R2 Score')
     plt.legend()
-    plt.show()
+    plt.savefig(f"{output_dir}/{title.replace(' ', '_').lower()}.png")
+    plt.close()
