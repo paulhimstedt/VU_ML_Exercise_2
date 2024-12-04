@@ -57,9 +57,7 @@ reports_adult = {}
 reports_spambase = {}
 for name, model_func in tqdm(easy_models, desc="Running easy models on Adult dataset"):
     results_adult[name] = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
-    results_adult[name], reports_adult[name] = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
 for name, model_func in tqdm(easy_models, desc="Running easy models on Spambase dataset"):
-    results_spambase[name], reports_spambase[name] = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
     results_spambase[name] = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
 
 # Create output directory for plots
