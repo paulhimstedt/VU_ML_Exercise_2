@@ -93,15 +93,15 @@ logging.info("Plotting results...")
 results = {
     'Adult Dataset': {
         'Custom RF': {'mse': mse1, 'r2': r2_1},
-        'Sklearn RF': {'mse': results_adult["Random Forest"][0], 'r2': results_adult["Random Forest"][1]},
-        'Decision Tree': {'mse': results_adult["Decision Tree"][0], 'r2': results_adult["Decision Tree"][1]},
-        'KNN': {'mse': results_adult["KNN"][0], 'r2': results_adult["KNN"][1]}
+        'Sklearn RF': {'mse': results_adult["Random Forest"]['mse'], 'r2': results_adult["Random Forest"]['r2']},
+        'Decision Tree': {'mse': results_adult["Decision Tree"]['mse'], 'r2': results_adult["Decision Tree"]['r2']},
+        'KNN': {'mse': results_adult["KNN"]['mse'], 'r2': results_adult["KNN"]['r2']}
     },
     'Spambase Dataset': {
         'Custom RF': {'mse': mse2, 'r2': r2_2},
-        'Sklearn RF': {'mse': results_spambase["Random Forest"][0], 'r2': results_spambase["Random Forest"][1]},
-        'Decision Tree': {'mse': results_spambase["Decision Tree"][0], 'r2': results_spambase["Decision Tree"][1]},
-        'KNN': {'mse': results_spambase["KNN"][0], 'r2': results_spambase["KNN"][1]}
+        'Sklearn RF': {'mse': results_spambase["Random Forest"]['mse'], 'r2': results_spambase["Random Forest"]['r2']},
+        'Decision Tree': {'mse': results_spambase["Decision Tree"]['mse'], 'r2': results_spambase["Decision Tree"]['r2']},
+        'KNN': {'mse': results_spambase["KNN"]['mse'], 'r2': results_spambase["KNN"]['r2']}
     }
 }
 
