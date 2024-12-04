@@ -36,12 +36,12 @@ logging.info("Running experiments with custom random forest...")
 predictions1 = custom_random_forest(X_adult_train, y_adult_train, X_adult_test)
 mse1 = mean_squared_error(y_adult_test, predictions1)
 r2_1 = r2_score(y_adult_test, predictions1)
-report1 = classification_report(y_adult_test, predictions1, output_dict=True)
+report1 = None  # Classification report is not applicable for regression
 
 predictions2 = custom_random_forest(X_spambase_train, y_spambase_train, X_spambase_test)
 mse2 = mean_squared_error(y_spambase_test, predictions2)
 r2_2 = r2_score(y_spambase_test, predictions2)
-report2 = classification_report(y_spambase_test, predictions2, output_dict=True)
+report2 = None  # Classification report is not applicable for regression
 
 # Run easy models for comparison
 logging.info("Running easy models for comparison...")
@@ -84,5 +84,5 @@ results = {
     }
 }
 
-plot_results(results, output_dir, {'Adult Dataset': reports_adult, 'Spambase Dataset': reports_spambase})
+plot_results(results, output_dir)
 logging.info("Experiments completed!")
