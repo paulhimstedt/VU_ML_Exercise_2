@@ -4,10 +4,10 @@ from data_loader import load_dataset
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from preprocessing import preprocess_data
-from experiments import run_experiment, plot_results
+from experiments import run_experiment, plot_results, plot_classification_report_heatmap
 from easy_models import sklearn_random_forest, sklearn_decision_tree, sklearn_knn
 from custom_random_forest import custom_random_forest
-from sklearn.metrics import mean_squared_error, r2_score, classification_report
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -36,12 +36,14 @@ logging.info("Running experiments with custom random forest...")
 predictions1 = custom_random_forest(X_adult_train, y_adult_train, X_adult_test)
 mse1 = mean_squared_error(y_adult_test, predictions1)
 r2_1 = r2_score(y_adult_test, predictions1)
-report1 = None  # Classification report is not applicable for regression
+mae1 = mean_absolute_error(y_adult_test, predictions1)
+plot_classification_report_heatmap(y_adult_test, predictions1, "Custom RF Adult Dataset", output_dir, "PuRd")
 
 predictions2 = custom_random_forest(X_spambase_train, y_spambase_train, X_spambase_test)
 mse2 = mean_squared_error(y_spambase_test, predictions2)
 r2_2 = r2_score(y_spambase_test, predictions2)
-report2 = None  # Classification report is not applicable for regression
+mae2 = mean_absolute_error(y_spambase_test, predictions2)
+plot_classification_report_heatmap(y_spambase_test, predictions2, "Custom RF Spambase Dataset", output_dir, "PuRd")
 
 # Run easy models for comparison
 logging.info("Running easy models for comparison...")
@@ -56,9 +58,15 @@ results_spambase = {}
 reports_adult = {}
 reports_spambase = {}
 for name, model_func in tqdm(easy_models, desc="Running easy models on Adult dataset"):
-    results_adult[name] = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
+    mse, r2 = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
+    mae = mean_absolute_error(y_adult_test, model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test))
+    results_adult[name] = {'mse': mse, 'r2': r2, 'mae': mae}
+    plot_classification_report_heatmap(y_adult_test, model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test), f"{name} Adult Dataset", output_dir, "Greens")
 for name, model_func in tqdm(easy_models, desc="Running easy models on Spambase dataset"):
-    results_spambase[name] = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
+    mse, r2 = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
+    mae = mean_absolute_error(y_spambase_test, model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test))
+    results_spambase[name] = {'mse': mse, 'r2': r2, 'mae': mae}
+    plot_classification_report_heatmap(y_spambase_test, model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test), f"{name} Spambase Dataset", output_dir, "Greens")
 
 # Create output directory for plots
 import os
