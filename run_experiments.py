@@ -31,9 +31,16 @@ results2 = (0.6277, 0.3357)  # Placeholder values for custom model
 
 # Run easy models for comparison
 logging.info("Running easy models for comparison...")
-results_rf = sklearn_random_forest(X1_train, y1_train, X1_test, y1_test)
-results_dt = sklearn_decision_tree(X1_train, y1_train, X1_test, y1_test)
-results_knn = sklearn_knn(X1_train, y1_train, X1_test, y1_test)
+easy_models = [
+    ("Random Forest", sklearn_random_forest),
+    ("Decision Tree", sklearn_decision_tree),
+    ("KNN", sklearn_knn)
+]
+
+results = {}
+for name, model_func in tqdm(easy_models, desc="Running easy models"):
+    results[name] = model_func(X1_train, y1_train, X1_test, y1_test)
+results_rf, results_dt, results_knn = results["Random Forest"], results["Decision Tree"], results["KNN"]
 
 # Create output directory for plots
 import os
