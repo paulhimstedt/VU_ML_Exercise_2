@@ -67,14 +67,16 @@ results_spambase = {}
 reports_adult = {}
 reports_spambase = {}
 for name, model_func in tqdm(easy_models, desc="Running easy models on Adult dataset"):
-    mse, r2 = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
-    predictions = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
+    predictions = model_func(X_adult_train, y_adult_train, X_adult_test)
+    mse = mean_squared_error(y_adult_test, predictions)
+    r2 = r2_score(y_adult_test, predictions)
     mae = mean_absolute_error(y_adult_test, predictions)
     results_adult[name] = {'mse': mse, 'r2': r2, 'mae': mae}
     plot_classification_report_heatmap(y_adult_test, predictions, f"{name} Adult Dataset", output_dir, "Greens")
 for name, model_func in tqdm(easy_models, desc="Running easy models on Spambase dataset"):
-    mse, r2 = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
-    predictions = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
+    predictions = model_func(X_spambase_train, y_spambase_train, X_spambase_test)
+    mse = mean_squared_error(y_spambase_test, predictions)
+    r2 = r2_score(y_spambase_test, predictions)
     mae = mean_absolute_error(y_spambase_test, predictions)
     results_spambase[name] = {'mse': mse, 'r2': r2, 'mae': mae}
     plot_classification_report_heatmap(y_spambase_test, predictions, f"{name} Spambase Dataset", output_dir, "Greens")
