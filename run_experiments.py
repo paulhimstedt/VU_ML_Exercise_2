@@ -4,7 +4,7 @@ from data_loader import load_dataset
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from preprocessing import preprocess_data
-from experiments import run_experiment, plot_results, plot_classification_report_heatmap
+from experiments import run_experiment, plot_results, plot_classification_report_heatmaps
 from easy_models import sklearn_random_forest, sklearn_decision_tree, sklearn_knn
 from custom_random_forest import custom_random_forest
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
