@@ -7,6 +7,7 @@ from preprocessing import preprocess_data
 from experiments import run_experiment, plot_results
 from easy_models import sklearn_random_forest, sklearn_decision_tree, sklearn_knn
 from custom_random_forest import custom_random_forest
+from sklearn.metrics import mean_squared_error, r2_score, classification_report
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -70,13 +71,13 @@ os.makedirs(output_dir, exist_ok=True)
 logging.info("Plotting results...")
 results = {
     'Adult Dataset': {
-        'Custom RF': {'mse': results1[0], 'r2': results1[1]},
+        'Custom RF': {'mse': mse1, 'r2': r2_1},
         'Sklearn RF': {'mse': results_adult["Random Forest"][0], 'r2': results_adult["Random Forest"][1]},
         'Decision Tree': {'mse': results_adult["Decision Tree"][0], 'r2': results_adult["Decision Tree"][1]},
         'KNN': {'mse': results_adult["KNN"][0], 'r2': results_adult["KNN"][1]}
     },
     'Spambase Dataset': {
-        'Custom RF': {'mse': results2[0], 'r2': results2[1]},
+        'Custom RF': {'mse': mse2, 'r2': r2_2},
         'Sklearn RF': {'mse': results_spambase["Random Forest"][0], 'r2': results_spambase["Random Forest"][1]},
         'Decision Tree': {'mse': results_spambase["Decision Tree"][0], 'r2': results_spambase["Decision Tree"][1]},
         'KNN': {'mse': results_spambase["KNN"][0], 'r2': results_spambase["KNN"][1]}
