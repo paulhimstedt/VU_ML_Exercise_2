@@ -1,4 +1,4 @@
- timport logging
+import logging
 from tqdm import tqdm
 from data_loader import load_dataset
 from preprocessing import preprocess_data
