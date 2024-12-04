@@ -1,6 +1,7 @@
 import logging
 from tqdm import tqdm
 from data_loader import load_dataset
+from sklearn.model_selection import train_test_split
 from preprocessing import preprocess_data
 from experiments import run_experiment, plot_results
 from easy_models import sklearn_random_forest, sklearn_decision_tree, sklearn_knn
@@ -45,7 +46,6 @@ for name, model_func in tqdm(easy_models, desc="Running easy models on Adult dat
     results_adult[name] = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
 for name, model_func in tqdm(easy_models, desc="Running easy models on Spambase dataset"):
     results_spambase[name] = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
-results_rf, results_dt, results_knn = results["Random Forest"], results["Decision Tree"], results["KNN"]
 
 # Create output directory for plots
 import os
