@@ -9,9 +9,10 @@ from easy_models import sklearn_random_forest, sklearn_decision_tree, sklearn_kn
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load datasets
-logging.info("Loading datasets...")
-X1, y1 = load_dataset(2)
-X2, y2 = load_dataset(94)
+logging.info("Loading Adult dataset...")
+X_adult, y_adult = load_dataset(2)
+logging.info("Loading Spambase dataset...")
+X_spambase, y_spambase = load_dataset(94)
 
 # Preprocess datasets
 logging.info("Preprocessing datasets...")
@@ -37,9 +38,12 @@ easy_models = [
     ("KNN", sklearn_knn)
 ]
 
-results = {}
-for name, model_func in tqdm(easy_models, desc="Running easy models"):
-    results[name] = model_func(X1_train, y1_train, X1_test, y1_test)
+results_adult = {}
+results_spambase = {}
+for name, model_func in tqdm(easy_models, desc="Running easy models on Adult dataset"):
+    results_adult[name] = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
+for name, model_func in tqdm(easy_models, desc="Running easy models on Spambase dataset"):
+    results_spambase[name] = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
 results_rf, results_dt, results_knn = results["Random Forest"], results["Decision Tree"], results["KNN"]
 
 # Create output directory for plots
@@ -50,17 +54,17 @@ os.makedirs(output_dir, exist_ok=True)
 # Plot results
 logging.info("Plotting results...")
 results = {
-    'Dataset 1': {
+    'Adult Dataset': {
         'Custom RF': {'mse': results1[0], 'r2': results1[1]},
-        'Sklearn RF': {'mse': results_rf[0], 'r2': results_rf[1]},
-        'Decision Tree': {'mse': results_dt[0], 'r2': results_dt[1]},
-        'KNN': {'mse': results_knn[0], 'r2': results_knn[1]}
+        'Sklearn RF': {'mse': results_adult["Random Forest"][0], 'r2': results_adult["Random Forest"][1]},
+        'Decision Tree': {'mse': results_adult["Decision Tree"][0], 'r2': results_adult["Decision Tree"][1]},
+        'KNN': {'mse': results_adult["KNN"][0], 'r2': results_adult["KNN"][1]}
     },
-    'Dataset 2': {
+    'Spambase Dataset': {
         'Custom RF': {'mse': results2[0], 'r2': results2[1]},
-        'Sklearn RF': {'mse': results_rf[0], 'r2': results_rf[1]},
-        'Decision Tree': {'mse': results_dt[0], 'r2': results_dt[1]},
-        'KNN': {'mse': results_knn[0], 'r2': results_knn[1]}
+        'Sklearn RF': {'mse': results_spambase["Random Forest"][0], 'r2': results_spambase["Random Forest"][1]},
+        'Decision Tree': {'mse': results_spambase["Decision Tree"][0], 'r2': results_spambase["Decision Tree"][1]},
+        'KNN': {'mse': results_spambase["KNN"][0], 'r2': results_spambase["KNN"][1]}
     }
 }
 

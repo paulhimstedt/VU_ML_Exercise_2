@@ -16,7 +16,7 @@ def plot_results(results, output_dir):
     fig.suptitle("Model Performance Comparison")
 
     models = ['Custom RF', 'Sklearn RF', 'Decision Tree', 'KNN']
-    datasets = ['Dataset 1', 'Dataset 2']
+    datasets = ['Adult Dataset', 'Spambase Dataset']
 
     for i, dataset in enumerate(datasets):
         for j, model in enumerate(models):
