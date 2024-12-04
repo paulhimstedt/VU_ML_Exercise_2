@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
@@ -9,22 +10,21 @@ def run_experiment(model, X_train, y_train, X_test, y_test):
     r2 = r2_score(y_test, predictions)
     return mse, r2
 
-def plot_results(results, title, output_dir):
-    fig, axs = plt.subplots(2, 1, figsize=(10, 8))
-    fig.suptitle(title)
+def plot_results(results, output_dir):
+    sns.set_palette("husl")
+    fig, axs = plt.subplots(2, 4, figsize=(20, 10))
+    fig.suptitle("Model Performance Comparison")
 
-    axs[0].plot(results['mse'], label='MSE')
-    axs[0].set_title('Mean Squared Error')
-    axs[0].set_xlabel('Model')
-    axs[0].set_ylabel('MSE')
-    axs[0].legend()
+    models = ['Custom RF', 'Sklearn RF', 'Decision Tree', 'KNN']
+    datasets = ['Dataset 1', 'Dataset 2']
 
-    axs[1].plot(results['r2'], label='R2 Score')
-    axs[1].set_title('R2 Score')
-    axs[1].set_xlabel('Model')
-    axs[1].set_ylabel('R2')
-    axs[1].legend()
+    for i, dataset in enumerate(datasets):
+        for j, model in enumerate(models):
+            axs[i, j].bar(['MSE', 'R2'], [results[dataset][model]['mse'], results[dataset][model]['r2']])
+            axs[i, j].set_title(f"{model} on {dataset}")
+            axs[i, j].set_xlabel('Metric')
+            axs[i, j].set_ylabel('Score')
 
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.savefig(f"{output_dir}/{title.replace(' ', '_').lower()}.png")
+    plt.savefig(f"{output_dir}/model_performance_comparison.png")
     plt.close()

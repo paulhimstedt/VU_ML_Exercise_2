@@ -49,13 +49,19 @@ os.makedirs(output_dir, exist_ok=True)
 
 # Plot results
 logging.info("Plotting results...")
-plot_results({'mse': [results1[0], results_rf[0]], 'r2': [results1[1], results_rf[1]]}, "Random Forest Comparison", output_dir)
-plot_results({'mse': [results1[0], results_dt[0]], 'r2': [results1[1], results_dt[1]]}, "Decision Tree Comparison", output_dir)
-plot_results({'mse': [results1[0], results_knn[0]], 'r2': [results1[1], results_knn[1]]}, "KNN Comparison", output_dir)
+results = {
+    'Dataset 1': {
+        'Custom RF': {'mse': results1[0], 'r2': results1[1]},
+        'Sklearn RF': {'mse': results_rf[0], 'r2': results_rf[1]},
+        'Decision Tree': {'mse': results_dt[0], 'r2': results_dt[1]},
+        'KNN': {'mse': results_knn[0], 'r2': results_knn[1]}
+    },
+    'Dataset 2': {
+        'Custom RF': {'mse': results2[0], 'r2': results2[1]},
+        'Sklearn RF': {'mse': results_rf[0], 'r2': results_rf[1]},
+        'Decision Tree': {'mse': results_dt[0], 'r2': results_dt[1]},
+        'KNN': {'mse': results_knn[0], 'r2': results_knn[1]}
+    }
+}
 
-# Plot results
-print("Custom Random Forest:", results1)
-print("Sklearn Random Forest:", results_rf)
-print("Sklearn Decision Tree:", results_dt)
-print("Sklearn KNN:", results_knn)
-plot_results({'mse': [results1[0], results2[0]], 'r2': [results1[1], results2[1]]}, "Custom Model Comparison", output_dir)
+plot_results(results, output_dir)
