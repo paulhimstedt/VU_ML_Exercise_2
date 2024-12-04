@@ -67,14 +67,14 @@ results_spambase = {}
 reports_adult = {}
 reports_spambase = {}
 for name, model_func in tqdm(easy_models, desc="Running easy models on Adult dataset"):
-    predictions = model_func(X_adult_train, y_adult_train, X_adult_test)
+    predictions, _, _ = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
     mse = mean_squared_error(y_adult_test, predictions)
     r2 = r2_score(y_adult_test, predictions)
     mae = mean_absolute_error(y_adult_test, predictions)
     results_adult[name] = {'mse': mse, 'r2': r2, 'mae': mae}
     plot_classification_report_heatmap(y_adult_test, predictions, f"{name} Adult Dataset", output_dir, "Greens")
 for name, model_func in tqdm(easy_models, desc="Running easy models on Spambase dataset"):
-    predictions = model_func(X_spambase_train, y_spambase_train, X_spambase_test)
+    predictions, _, _ = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
     mse = mean_squared_error(y_spambase_test, predictions)
     r2 = r2_score(y_spambase_test, predictions)
     mae = mean_absolute_error(y_spambase_test, predictions)
@@ -86,7 +86,21 @@ import os
 output_dir = "output"
 os.makedirs(output_dir, exist_ok=True)
 
-# Plot results
+# Plot classification report heatmaps
+plot_classification_report_heatmaps({
+    'Adult Dataset': {
+        'Custom RF': {'y_true': y_adult_test, 'y_pred': binary_predictions1},
+        'Sklearn RF': {'y_true': y_adult_test, 'y_pred': results_adult["Random Forest"]['predictions']},
+        'Decision Tree': {'y_true': y_adult_test, 'y_pred': results_adult["Decision Tree"]['predictions']},
+        'KNN': {'y_true': y_adult_test, 'y_pred': results_adult["KNN"]['predictions']}
+    },
+    'Spambase Dataset': {
+        'Custom RF': {'y_true': y_spambase_test, 'y_pred': binary_predictions2},
+        'Sklearn RF': {'y_true': y_spambase_test, 'y_pred': results_spambase["Random Forest"]['predictions']},
+        'Decision Tree': {'y_true': y_spambase_test, 'y_pred': results_spambase["Decision Tree"]['predictions']},
+        'KNN': {'y_true': y_spambase_test, 'y_pred': results_spambase["KNN"]['predictions']}
+    }
+}, output_dir)
 logging.info("Plotting results...")
 results = {
     'Adult Dataset': {
