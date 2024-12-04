@@ -31,8 +31,16 @@ X_spambase_train, X_spambase_test, y_spambase_train, y_spambase_test = train_tes
 
 # Run experiments with progress bar
 logging.info("Running experiments with custom random forest...")
-results1, report1 = run_experiment(custom_random_forest, X_adult_train, y_adult_train, X_adult_test, y_adult_test, is_custom=True)
-results2, report2 = run_experiment(custom_random_forest, X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test, is_custom=True)
+# Run custom random forest separately
+predictions1 = custom_random_forest(X_adult_train, y_adult_train, X_adult_test)
+mse1 = mean_squared_error(y_adult_test, predictions1)
+r2_1 = r2_score(y_adult_test, predictions1)
+report1 = classification_report(y_adult_test, predictions1, output_dict=True)
+
+predictions2 = custom_random_forest(X_spambase_train, y_spambase_train, X_spambase_test)
+mse2 = mean_squared_error(y_spambase_test, predictions2)
+r2_2 = r2_score(y_spambase_test, predictions2)
+report2 = classification_report(y_spambase_test, predictions2, output_dict=True)
 
 # Run easy models for comparison
 logging.info("Running easy models for comparison...")
