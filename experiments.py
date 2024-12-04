@@ -14,7 +14,14 @@ def run_experiment(model, X_train, y_train, X_test, y_test, is_custom=False):
     r2 = r2_score(y_test, predictions)
     return mse, r2
 
-def plot_classification_report_heatmaps(results, output_dir):
+def plot_classification_report_heatmap(y_true, y_pred, title, output_dir, cmap):
+    report = classification_report(y_true, y_pred, output_dict=True)
+    report_df = pd.DataFrame(report).transpose()
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(report_df.iloc[:-1, :-1], annot=True, cmap=cmap)
+    plt.title(title)
+    plt.savefig(f"{output_dir}/{title.replace(' ', '_').lower()}_heatmap.png")
+    plt.close()
     fig, axs = plt.subplots(2, 4, figsize=(24, 12))
     fig.suptitle("Classification Report Heatmaps")
 
