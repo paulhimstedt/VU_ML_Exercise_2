@@ -8,8 +8,17 @@ The goal of this project is to implement a custom random forest algorithm and co
 
 ## Datasets
 
-1. **Dataset 1**: 48.84k samples, 14 features
-2. **Dataset 2**: 4.6k samples, 57 features
+1. **Dataset 1: Adult Dataset**
+   - **Source**: UCI Machine Learning Repository
+   - **Characteristics**: 48.84k samples, 14 features
+   - **Description**: This dataset is used for predicting whether income exceeds $50K/yr based on census data. It includes both categorical and numerical features.
+   - **Preprocessing**: Categorical features are encoded using one-hot encoding, and numerical features are scaled.
+
+2. **Dataset 2: Spambase Dataset**
+   - **Source**: UCI Machine Learning Repository
+   - **Characteristics**: 4.6k samples, 57 features
+   - **Description**: This dataset is used for classifying emails as spam or non-spam. It includes integer and real-valued features, with some missing values.
+   - **Preprocessing**: Features are scaled, and missing values are imputed where necessary.
 
 ## Models
 
