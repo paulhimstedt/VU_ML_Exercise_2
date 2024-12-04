@@ -13,9 +13,9 @@ def run_experiment(model, X_train, y_train, X_test, y_test, is_custom=False):
     r2 = r2_score(y_test, predictions)
     return mse, r2
 
-def plot_regression_metrics_heatmap(results, output_dir):
+def plot_regression_metrics_barplots(results, output_dir):
     fig, axs = plt.subplots(2, 4, figsize=(24, 12))
-    fig.suptitle("Regression Metrics Heatmaps")
+    fig.suptitle("Regression Metrics Bar Plots")
 
     models = ['Custom RF', 'Sklearn RF', 'Decision Tree', 'KNN']
     datasets = ['Adult Dataset', 'Spambase Dataset']
@@ -24,11 +24,12 @@ def plot_regression_metrics_heatmap(results, output_dir):
     for i, dataset in enumerate(datasets):
         for j, model in enumerate(models):
             scores = [results[dataset][model][metric.lower()] for metric in metrics]
-            sns.heatmap([scores], annot=True, cmap='coolwarm', ax=axs[i, j], cbar=False, xticklabels=metrics)
+            color = 'Greens' if model == 'Custom RF' else 'PuRd'
+            axs[i, j].bar(metrics, scores, color=sns.color_palette(color, len(metrics)))
             axs[i, j].set_title(f"{model} on {dataset}")
 
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.savefig(f"{output_dir}/regression_metrics_heatmaps.png")
+    plt.savefig(f"{output_dir}/regression_metrics_barplots.png")
     plt.close()
 
 def plot_results(results, output_dir):

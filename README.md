@@ -47,7 +47,7 @@ The results are visualized in a multi-plot figure saved in the `output` director
 
 ## Results Visualization
 
-The results of the experiments are visualized in the plots below, which are saved in the `output` directory as `model_performance_comparison.png` and `classification_reports.png`.
+The results of the experiments are visualized in the plots below, which are saved in the `output` directory as `model_performance_comparison.png` and `regression_metrics_barplots.png`.
 
 ![Model Performance Comparison](output/model_performance_comparison.png)
 ![Classification Reports](output/classification_reports.png)

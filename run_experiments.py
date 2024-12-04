@@ -4,7 +4,7 @@ from data_loader import load_dataset
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from preprocessing import preprocess_data
-from experiments import run_experiment, plot_results, plot_regression_metrics_heatmap
+from experiments import run_experiment, plot_results, plot_regression_metrics_barplots
 from easy_models import sklearn_random_forest, sklearn_decision_tree, sklearn_knn
 from custom_random_forest import custom_random_forest
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
@@ -75,7 +75,7 @@ output_dir = "output"
 os.makedirs(output_dir, exist_ok=True)
 
 # Plot classification report heatmaps
-plot_regression_metrics_heatmap({
+plot_regression_metrics_barplots({
     'Adult Dataset': {
         'Custom RF': {'mse': mse1, 'r2': r2_1, 'mae': mae1},
         'Sklearn RF': results_adult["Random Forest"],
