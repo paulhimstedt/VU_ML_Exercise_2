@@ -30,7 +30,10 @@ X_adult_train, X_adult_test, y_adult_train, y_adult_test = train_test_split(X_ad
 logging.info("Splitting Spambase dataset into training and testing sets...")
 X_spambase_train, X_spambase_test, y_spambase_train, y_spambase_test = train_test_split(X_spambase_scaled, y_spambase, test_size=0.2)
 
-# Run experiments with progress bar
+# Create output directory for plots
+import os
+output_dir = "output"
+os.makedirs(output_dir, exist_ok=True)
 logging.info("Running experiments with custom random forest...")
 # Run custom random forest separately
 predictions1 = custom_random_forest(X_adult_train, y_adult_train, X_adult_test)
