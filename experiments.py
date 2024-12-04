@@ -22,7 +22,12 @@ def plot_results(results, output_dir):
         for j, model in enumerate(models):
             metrics = ['MSE', 'R2']
             scores = [results[dataset][model]['mse'], results[dataset][model]['r2']]
-            axs[i, j].plot(metrics, scores, marker='o')
+            # Plotting with additional details
+            axs[i, j].plot(metrics, scores, marker='o', label=f"{model} Scores")
+            axs[i, j].fill_between(metrics, [0, 0], scores, alpha=0.2)
+            axs[i, j].scatter(metrics, scores, color='red')
+            axs[i, j].set_ylim(0, 1)
+            axs[i, j].legend()
             axs[i, j].set_title(f"{model} on {dataset}")
             axs[i, j].set_xlabel('Metric')
             axs[i, j].set_ylabel('Score')
