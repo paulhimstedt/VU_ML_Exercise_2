@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score, classification_report

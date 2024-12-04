@@ -6,6 +6,7 @@ import pandas as pd
 from preprocessing import preprocess_data
 from experiments import run_experiment, plot_results
 from easy_models import sklearn_random_forest, sklearn_decision_tree, sklearn_knn
+from custom_random_forest import custom_random_forest
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
