@@ -41,7 +41,7 @@ def plot_results(results, output_dir):
 
     for i, dataset in enumerate(datasets):
         for j, model in enumerate(models):
-            metrics = ['MSE', 'R2', 'MAE']
+            metrics = ['MSE', 'R2']
             scores = [results[dataset][model]['mse'], results[dataset][model]['r2']]
             axs[i, j].bar(metrics, scores, color=['blue', 'orange', 'green'])
             axs[i, j].set_ylim(0, max(scores) + 0.1)
