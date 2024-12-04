@@ -70,3 +70,4 @@ results = {
 }
 
 plot_results(results, output_dir)
+logging.info("Experiments completed!")
