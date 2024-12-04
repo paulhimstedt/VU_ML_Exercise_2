@@ -36,7 +36,9 @@ output_dir = "output"
 os.makedirs(output_dir, exist_ok=True)
 logging.info("Running experiments with custom random forest...")
 # Run custom random forest separately
-predictions1 = custom_random_forest(X_adult_train, y_adult_train, X_adult_test)
+import numpy as np
+
+predictions1 = np.array(custom_random_forest(X_adult_train, y_adult_train, X_adult_test))
 mse1 = mean_squared_error(y_adult_test, predictions1)
 r2_1 = r2_score(y_adult_test, predictions1)
 mae1 = mean_absolute_error(y_adult_test, predictions1)
@@ -44,7 +46,7 @@ mae1 = mean_absolute_error(y_adult_test, predictions1)
 binary_predictions1 = (predictions1 > 0.5).astype(int)
 plot_classification_report_heatmap(y_adult_test, binary_predictions1, "Custom RF Adult Dataset", output_dir, "PuRd")
 
-predictions2 = custom_random_forest(X_spambase_train, y_spambase_train, X_spambase_test)
+predictions2 = np.array(custom_random_forest(X_spambase_train, y_spambase_train, X_spambase_test))
 mse2 = mean_squared_error(y_spambase_test, predictions2)
 r2_2 = r2_score(y_spambase_test, predictions2)
 mae2 = mean_absolute_error(y_spambase_test, predictions2)
