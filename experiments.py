@@ -20,7 +20,9 @@ def plot_results(results, output_dir):
 
     for i, dataset in enumerate(datasets):
         for j, model in enumerate(models):
-            axs[i, j].bar(['MSE', 'R2'], [results[dataset][model]['mse'], results[dataset][model]['r2']])
+            metrics = ['MSE', 'R2']
+            scores = [results[dataset][model]['mse'], results[dataset][model]['r2']]
+            axs[i, j].plot(metrics, scores, marker='o')
             axs[i, j].set_title(f"{model} on {dataset}")
             axs[i, j].set_xlabel('Metric')
             axs[i, j].set_ylabel('Score')

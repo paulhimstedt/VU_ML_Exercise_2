@@ -45,6 +45,10 @@ The results are visualized in a multi-plot figure saved in the `output` director
 
 3. **View Results**: Check the `output` directory for the generated plots.
 
-## Conclusion
+## Results Visualization
+
+The results of the experiments are visualized in the plot below, which is saved in the `output` directory as `model_performance_comparison.png`.
+
+![Model Performance Comparison](output/model_performance_comparison.png)
 
 This project demonstrates the implementation of a custom random forest regressor and its comparison with existing models. The results provide insights into the performance and efficiency of different regression techniques across datasets with varying characteristics.
