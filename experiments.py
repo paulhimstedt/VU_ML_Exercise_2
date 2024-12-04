@@ -22,6 +22,7 @@ def plot_classification_report_heatmap(y_true, y_pred, title, output_dir, cmap):
     plt.title(title)
     plt.savefig(f"{output_dir}/{title.replace(' ', '_').lower()}_heatmap.png")
     plt.close()
+def plot_classification_report_heatmaps(results, output_dir):
     fig, axs = plt.subplots(2, 4, figsize=(24, 12))
     fig.suptitle("Classification Report Heatmaps")
 
