@@ -6,5 +6,5 @@ def load_dataset(dataset_id):
     X = dataset.data.features
     y = dataset.data.targets
     # Convert target variable to numerical format
-    y_encoded = pd.get_dummies(y, drop_first=True).values.ravel()
+    y_encoded = y.astype('category').cat.codes
     return X, y_encoded
