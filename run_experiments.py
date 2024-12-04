@@ -15,15 +15,16 @@ logging.info("Loading Spambase dataset...")
 X_spambase, y_spambase = load_dataset(94)
 
 # Preprocess datasets
-logging.info("Preprocessing datasets...")
-X1_scaled = preprocess_data(X1)
-X2_scaled = preprocess_data(X2)
+logging.info("Preprocessing Adult dataset...")
+X_adult_scaled = preprocess_data(X_adult)
+logging.info("Preprocessing Spambase dataset...")
+X_spambase_scaled = preprocess_data(X_spambase)
 
 # Split datasets into training and testing sets
-logging.info("Splitting datasets into training and testing sets...")
-from sklearn.model_selection import train_test_split
-X1_train, X1_test, y1_train, y1_test = train_test_split(X1_scaled, y1, test_size=0.2)
-X2_train, X2_test, y2_train, y2_test = train_test_split(X2_scaled, y2, test_size=0.2)
+logging.info("Splitting Adult dataset into training and testing sets...")
+X_adult_train, X_adult_test, y_adult_train, y_adult_test = train_test_split(X_adult_scaled, y_adult, test_size=0.2)
+logging.info("Splitting Spambase dataset into training and testing sets...")
+X_spambase_train, X_spambase_test, y_spambase_train, y_spambase_test = train_test_split(X_spambase_scaled, y_spambase, test_size=0.2)
 
 # Run experiments with progress bar
 logging.info("Running experiments with custom random forest...")
