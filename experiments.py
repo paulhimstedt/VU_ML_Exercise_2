@@ -15,7 +15,7 @@ def run_experiment(model, X_train, y_train, X_test, y_test, is_custom=False):
     return mse, r2
 
 def plot_classification_report_heatmap(y_true, y_pred, title, output_dir, cmap):
-    report = classification_report(y_true, y_pred, output_dict=True)
+    report = classification_report(y_true, y_pred, output_dict=True, zero_division=0)
     report_df = pd.DataFrame(report).transpose()
     plt.figure(figsize=(10, 6))
     sns.heatmap(report_df.iloc[:-1, :-1], annot=True, cmap=cmap)
