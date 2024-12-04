@@ -2,6 +2,7 @@ import logging
 from tqdm import tqdm
 from data_loader import load_dataset
 from sklearn.model_selection import train_test_split
+import pandas as pd
 from preprocessing import preprocess_data
 from experiments import run_experiment, plot_results
 from easy_models import sklearn_random_forest, sklearn_decision_tree, sklearn_knn
@@ -29,8 +30,8 @@ X_spambase_train, X_spambase_test, y_spambase_train, y_spambase_test = train_tes
 
 # Run experiments with progress bar
 logging.info("Running experiments with custom random forest...")
-results1 = (0.6277, 0.3357)  # Placeholder values for custom model
-results2 = (0.6277, 0.3357)  # Placeholder values for custom model
+results1, report1 = run_experiment(custom_random_forest, X_adult_train, y_adult_train, X_adult_test, y_adult_test, is_custom=True)
+results2, report2 = run_experiment(custom_random_forest, X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test, is_custom=True)
 
 # Run easy models for comparison
 logging.info("Running easy models for comparison...")
@@ -42,9 +43,13 @@ easy_models = [
 
 results_adult = {}
 results_spambase = {}
+reports_adult = {}
+reports_spambase = {}
 for name, model_func in tqdm(easy_models, desc="Running easy models on Adult dataset"):
     results_adult[name] = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
+    results_adult[name], reports_adult[name] = model_func(X_adult_train, y_adult_train, X_adult_test, y_adult_test)
 for name, model_func in tqdm(easy_models, desc="Running easy models on Spambase dataset"):
+    results_spambase[name], reports_spambase[name] = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
     results_spambase[name] = model_func(X_spambase_train, y_spambase_train, X_spambase_test, y_spambase_test)
 
 # Create output directory for plots
@@ -69,5 +74,5 @@ results = {
     }
 }
 
-plot_results(results, output_dir)
+plot_results(results, output_dir, {'Adult Dataset': reports_adult, 'Spambase Dataset': reports_spambase})
 logging.info("Experiments completed!")
