@@ -47,9 +47,8 @@ The results are visualized in the `output` directory. Each plot represents the p
 
 ## Results Visualization
 
-The results of the experiments are visualized in the plots below, which are saved in the `output` directory as `model_performance_comparison.png` and `regression_metrics_barplots.png`.
+The results of the experiments are visualized in the plots below, which are saved in the `output` directory as `regression_metrics_barplots.png`.
 
-![Model Performance Comparison](output/model_performance_comparison.png)
 ![Regression Metrics Barplots](output/regression_metrics_barplots.png)
 
 
