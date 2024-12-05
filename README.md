@@ -29,7 +29,7 @@ The goal of this project is to implement a custom random forest algorithm and co
 
 ## Results
 
-The results are visualized in a multi-plot figure saved in the `output` directory. Each subplot represents the performance of a model on a dataset, showing both Mean Squared Error (MSE) and R2 Score.
+The results are visualized in the `output` directory. Each plot represents the performance of a model on a dataset, showing both Mean Squared Error (MSE) and R2 Score.
 
 ## Instructions
 
@@ -50,19 +50,7 @@ The results are visualized in a multi-plot figure saved in the `output` director
 The results of the experiments are visualized in the plots below, which are saved in the `output` directory as `model_performance_comparison.png` and `regression_metrics_barplots.png`.
 
 ![Model Performance Comparison](output/model_performance_comparison.png)
-![Classification Reports](output/classification_reports.png)
+![Regression Metrics Barplots](output/regression_metrics_barplots.png)
 
-## Classification Report Heatmaps
-
-The classification report heatmaps provide a detailed view of the performance of each model on the datasets. These heatmaps are saved in the `output` directory with distinguishable color maps for easy models ("Greens") and the custom model ("PuRd").
-
-![Custom RF Adult Dataset Heatmap](output/custom_rf_adult_dataset_heatmap.png)
-![Custom RF Spambase Dataset Heatmap](output/custom_rf_spambase_dataset_heatmap.png)
-![Sklearn RF Adult Dataset Heatmap](output/sklearn_rf_adult_dataset_heatmap.png)
-![Sklearn RF Spambase Dataset Heatmap](output/sklearn_rf_spambase_dataset_heatmap.png)
-![Decision Tree Adult Dataset Heatmap](output/decision_tree_adult_dataset_heatmap.png)
-![Decision Tree Spambase Dataset Heatmap](output/decision_tree_spambase_dataset_heatmap.png)
-![KNN Adult Dataset Heatmap](output/knn_adult_dataset_heatmap.png)
-![KNN Spambase Dataset Heatmap](output/knn_spambase_dataset_heatmap.png)
 
 This project demonstrates the implementation of a custom random forest regressor and its comparison with existing models. The results provide insights into the performance and efficiency of different regression techniques across datasets with varying characteristics.
